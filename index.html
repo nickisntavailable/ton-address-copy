@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TON Connect Auth</title>
+    <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+    <script src="https://unpkg.com/@tonconnect/sdk@latest"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #wallet-address {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Авторизация через TON Connect</h1>
+    <button id="connect-button">Подключиться к TON</button>
+    <p id="wallet-address"></p>
+
+    <script>
+        const tonConnect = new TON_CONNECT_UI.TonConnectUI({
+            manifestUrl: 'http://127.0.0.1:5500/tonconnect-manifest.json'
+        });
+
+        const button = document.getElementById("connect-button");
+        const walletAddressElement = document.getElementById("wallet-address");
+        
+        button.addEventListener("click", async () => {
+            try {
+                await tonConnect.connectWallet();
+                const wallet = await tonConnect.getWallet();
+                if (wallet) {
+                    walletAddressElement.textContent = `Адрес: ${wallet.account.address}`;
+                    walletAddressElement.style.display = "block";
+                }
+            } catch (error) {
+                console.error("Ошибка подключения:", error);
+            }
+        });
+    </script>
+
+</body>
+</html>
