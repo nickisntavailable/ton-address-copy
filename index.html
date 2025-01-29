@@ -10,13 +10,16 @@
 </head>
 
 <body>
-    <button id="connect-button" onclick="connect()">Подключиться к TON</button>
-    <p id="wallet-address" onclick="copy()"></p>
-    <p class="copy">Copied</p>
+    <div class="content">
+        <button id="connect-button" onclick="connect()">Подключиться к TON</button>
+        <p id="wallet-address" onclick="copy()"></p>
+        <p id="copy">Copied</p>
+    </div>
 
     <script>
         const button = document.getElementById("connect-button");
         const walletAddressElement = document.getElementById("wallet-address");
+        const copyElement = document.getElementById("copy");
         const tonConnect = new TON_CONNECT_UI.TonConnectUI({
             manifestUrl: 'https://nickisntavailable.github.io/ton-address-copy/tonconnect-manifest.json'
         });
@@ -34,8 +37,9 @@
             }
         }
 
-        function copy() {
-            navigator.clipboard.writeText(walletAddressElement.innerHTML);
+        async function copy() {
+            await navigator.clipboard.writeText(walletAddressElement.innerHTML);
+            copyElement.style.opacity = 1;
         }
     </script>
 </body>
