@@ -29,7 +29,7 @@
                 await tonConnect.disconnect();
                 const acc = await tonConnect.connectWallet();
                 if (acc) {
-                    walletAddressElement.textContent = `Адрес: ${acc.account.address}`;
+                    walletAddressElement.textContent = acc.account.address;
                     walletAddressElement.style.display = "block";
                 }
             } catch (error) {
