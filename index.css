@@ -14,3 +14,8 @@ button {
     font-weight: bold;
     color: green;
 }
+.copy {
+    color: aquamarine;
+    font-size: 14px;
+    font-weight: 300;
+}

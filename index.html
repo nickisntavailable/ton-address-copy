@@ -10,9 +10,9 @@
 </head>
 
 <body>
-    <h1>Авторизация через TON Connect</h1>
-    <button id="connect-button">Подключиться к TON</button>
-    <p id="wallet-address"></p>
+    <button id="connect-button" onclick="connect()">Подключиться к TON</button>
+    <p id="wallet-address" onclick="copy()"></p>
+    <p class="copy">Copied</p>
 
     <script>
         const button = document.getElementById("connect-button");
@@ -21,7 +21,7 @@
             manifestUrl: 'https://nickisntavailable.github.io/ton-address-copy/tonconnect-manifest.json'
         });
 
-        button.addEventListener("click", async () => {
+        async function connect() {
             try {
                 await tonConnect.disconnect();
                 const acc = await tonConnect.connectWallet();
@@ -32,7 +32,11 @@
             } catch (error) {
                 console.error("Ошибка подключения:", error);
             }
-        });
+        }
+
+        function copy() {
+            navigator.clipboard.writeText(walletAddressElement.innerHTML);
+        }
     </script>
 </body>
 
